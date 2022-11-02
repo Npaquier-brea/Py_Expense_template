@@ -1,8 +1,20 @@
 from PyInquirer import prompt
-user_questions = [
+import csv
 
+user_questions = [
+    {
+        'type': 'input',
+        'name': 'name',
+        'message': 'Yo, what\'s your name young blood ?',
+    }
 ]
 
 def add_user():
-    # This function should create a new user, asking for its name
-    return
+    infos = prompt(user_questions)
+    filename = "users.csv"
+    with open(filename, 'a') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        tmp_data = [infos['name']]
+        csvwriter.writerow(tmp_data)
+    print("User Added !")
+    return True
